@@ -1,0 +1,24 @@
+### Laravel 10 ###
+/vendor
+/node_modules
+npm-debug.log
+bootstrap/compiled.php
+app/storage/
+/public/storage
+/public/hot
+/storage/*.key
+.env.*.php
+.env.php
+.env
+Homestead.yaml
+Homestead.json
+/.phpunit.cache
+/public/build
+.env.backup
+.env.production
+.phpunit.result.cache
+auth.json
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
