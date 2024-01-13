@@ -16,6 +16,7 @@
 	<title>Ceci'Style</title>
 	<link rel="stylesheet" type="text/css" href="../resources/css/app.css">
 	<link rel="stylesheet" type="text/css" href="../resources/css/gallery.css">
+	<link rel="stylesheet" type="text/css" href="../resources/css/booking.css">
 	<script type="text/javascript" src="../resources/js/lightbox-plus-jquery.min.js"></script>
 	<script type="text/javascript" src="../resources/js/gallery-photos.js" defer></script>
 </head>
@@ -63,6 +64,11 @@
 						<?php 
 							echo getAd("../public/images/ads/ad3.jpg", "10% off!", "In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations.", "img");
 						?>
+						<main id="first-booking" class="booking-businness">
+							<?php 
+								echo getBooking('');
+							?>
+						</main>
 			<?php							
 					}
 				}

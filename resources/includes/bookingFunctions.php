@@ -92,7 +92,7 @@ function getHours($d, $ids, $ds, $ns, $destiny) {
     $return .= "<div class='calendar' id='dataJS' data-module='firstStepBook'>";
     $return .= "  <h2 class='title'>Book An Appoinment</h2>";
     $return .= "  <div class='cal-days'>When Do You Want To Come?</div>";
-    $return .= "  <form action='".$goPage."' method='post'>";
+    $return .= "  <form action='".$goPage."' method='post' onsubmit='return validateForm()'>";
     $return .= "    <div class='cal-time'>Select A Day</div>";
     $return .= getDatePicker('', '', 'today');
     $return .= "    <div class='cal-time'>Select A Service</div>";
@@ -101,6 +101,7 @@ function getHours($d, $ids, $ds, $ns, $destiny) {
     $return .= getServicesAvailablesDB(getServicesDB($creator), $creator);
     $return .= "    </div>";
     $return .= "    <div class='cal-time'></div>";
+    $return .= "    <div id='select-service' class='alert-service'>Please Select A Service</div>";
     $return .= "     <input type='submit' id='firstStep' name='firstStep' value='Next Step'>";
     $return .= "  </form>";
     $return .= "</div>";
@@ -315,8 +316,8 @@ function getHours($d, $ids, $ds, $ns, $destiny) {
     $displayServices .= "        <input type='hidden' id='name_service' name='nameService' value='".$vin."'>";
     foreach ($aServices as $key => $value) {
       $displayServices .= "      <div class='cover-services-columns'>";
-      $displayServices .= "        <input type='radio' onclick='handleClick(this);' id='".$value['id_serv']."' name='service' value='".$value['duration_minutes_serv']."' data-name='".$value['name_serv']."' ";
-      if($i == 0) {$displayServices .= "checked>";} else {$displayServices .= ">";}
+      $displayServices .= "        <input type='radio' onclick='handleClick(this);' id='".$value['id_serv']."' name='service' value='".$value['duration_minutes_serv']."' data-name='".$value['name_serv']."'>";
+      #if($i == 0) {$displayServices .= "checked>";} else {$displayServices .= ">";}
       $displayServices .= "        <label for='".$value['id_serv']."'>".$value['name_serv']."</label>";
       $displayServices .= "      </div>";
       $i = 1;

@@ -4,8 +4,8 @@ let labels = [];
 if (moduleData.getAttribute("data-module") == "firstStepBook") {
     //const submitBtn = document.getElementById('firstStep')
     //const cDate = document.getElementById('bday')
-    const idService = document.getElementById("id_service");
-    const nameService = document.getElementById("name_service");
+    //const idService = document.getElementById("id_service");
+    //const nameService = document.getElementById("name_service");
     
     /*cDate.addEventListener('change', (e) => {
       submitBtn.disabled = !(
@@ -13,12 +13,30 @@ if (moduleData.getAttribute("data-module") == "firstStepBook") {
        );
     });*/
 
-    function handleClick(myRadio) {
-        idService.value = myRadio.id;
-        nameService.value = myRadio.dataset.name;
-    }
+    //function handleClick(myRadio) {
+    //    idService.value = myRadio.id;
+    //    nameService.value = myRadio.dataset.name;
+    //}
 
-    
+    function validateForm() {
+        // Intenta obtener la referencia al div por su id
+        var miDiv = document.getElementById("select-service");
+
+        // Obtener todos los elementos de tipo radio
+        var radios = document.querySelectorAll('input[type=radio]');
+        
+        // Verificar si al menos uno está marcado
+        var anyCheck = Array.from(radios).some(radio => radio.checked);
+        
+        // Permitir o bloquear el envío del formulario
+        if (anyCheck) {
+            return true; // Se permite enviar el formulario
+        } else {
+            // Cambia la propiedad display a "block" para mostrar el div
+            miDiv.style.display = "block";
+            return false; // Bloquear el envío del formulario
+        }
+    }
 
     let infoJS = document.createElement('script');
     infoJS.type = 'text/javascript';
