@@ -14,11 +14,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Ceci'Style</title>
-	<link rel="stylesheet" type="text/css" href="../resources/css/app.css">
-	<link rel="stylesheet" type="text/css" href="../resources/css/gallery.css">
-	<link rel="stylesheet" type="text/css" href="../resources/css/booking.css">
-	<script type="text/javascript" src="../resources/js/lightbox-plus-jquery.min.js"></script>
-	<script type="text/javascript" src="../resources/js/gallery-photos.js" defer></script>
+	<link rel="stylesheet" type="text/css" href="./resources/css/app.css">
+	<link rel="stylesheet" type="text/css" href="./resources/css/gallery.css">
+	<link rel="stylesheet" type="text/css" href="./resources/css/booking.css">
+	<script type="text/javascript" src="./resources/js/lightbox-plus-jquery.min.js"></script>
+	<script type="text/javascript" src="./resources/js/gallery-photos.js" defer></script>
 </head>
 <body>
 	<div class="main-wrapper">
@@ -46,7 +46,7 @@
 						echo getConfirmation($_POST['fullname'], $_POST['email'], $_POST['phone'], $_POST['dHidden'], $_POST['hHidden'],  $_POST['idsHidden'], $_POST['sHidden'], $_POST['comments'], $_POST['nsHidden']);
 					} else {
 						echo getVideo();
-						echo getAd("../public/images/ads/ad1.jpg", "10% off!", "In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations.", "img");
+						echo getAd("./public/images/ads/ad1.jpg", "10% off!", "In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations.", "img");
 		?>
 						<main id="photos-gallery" class="gallery-businness">
 							<?php 
@@ -54,7 +54,7 @@
 							?>
 						</main>
 							<?php 
-								echo getAd("../public/images/ads/ad2.jpg", "10% off!", "In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations.", "text");
+								echo getAd("./public/images/ads/ad2.jpg", "10% off!", "In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations.", "text");
 							?>
 						<main id="reviews-gallery" class="reviews-businness">
 							<?php 
@@ -62,7 +62,7 @@
 							?>
 						</main>
 						<?php 
-							echo getAd("../public/images/ads/ad3.jpg", "10% off!", "In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations.", "img");
+							echo getAd("./public/images/ads/ad3.jpg", "10% off!", "In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations.", "img");
 						?>
 						<main id="first-booking" class="booking-businness">
 							<?php 

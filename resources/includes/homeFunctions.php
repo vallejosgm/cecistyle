@@ -2,7 +2,7 @@
   function getLogo() {
     $links = '';
     $links .= ' <div class="logo">';
-    $links .= '   <img src="../public/images/logo.png">';
+    $links .= '   <img src="./public/images/logo.png">';
     $links .= ' </div>';
 
     return $links;
@@ -52,7 +52,7 @@
     $displayForm = "";
     $displayForm .= ' <main class="main-video">';
     $displayForm .= '   <video loop="" muted="muted" autoplay="">';
-    $displayForm .= '     <source src="../public/videos/'.$srcVideo.'"/>';
+    $displayForm .= '     <source src="./public/videos/'.$srcVideo.'"/>';
     $displayForm .= '   </video>';
     $displayForm .= ' </main>';
     
