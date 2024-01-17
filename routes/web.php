@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingControlller;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,15 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class);
 
-Route::get('booking', function(){
-    return 'pagina del booking';
-});
+#Route::post('booking', [BookingControlller::class, 'createBooking']);
+
+Route::post('hoursBooking', [BookingControlller::class, 'setHours']);
+
+Route::post('booking', [BookingControlller::class, 'create']);
+
 
 Route::get('booking/chooseHour', function($date, $type){
-    return 'pagina del booking';
-});
-
-Route::get('booking/fillForm', function(){
     return 'pagina del booking';
 });
 

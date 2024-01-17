@@ -1,4 +1,4 @@
-<?php
+@php
   if ($_SERVER['HTTP_HOST'] == 'localhost')
   {
     error_reporting(-1);
@@ -6,7 +6,8 @@
   }
   session_start();
   include_once($_SERVER['DOCUMENT_ROOT']."/cecistyle/resources/includes/list-stuff.php");
-?>
+  
+@endphp
 
 <!DOCTYPE html>
 <html>
@@ -23,19 +24,19 @@
 <body>
 	<div class="main-wrapper">
 		<header>
-			<?php 
+			@php 
 				echo getLogo();
-			?>
+			@endphp
 		</header>
 		<nav class="main-nav">
-			<?php 
+			@php 
 				echo getNav();
-			?>
+			@endphp
 		</nav>
 		<?php
 			if (isset($_POST['bday'])) {
 				echo "<div class='calendar' id='dataJS' data-module='secondStepBook'>";
-				echo getHours($_POST['bday'], $_POST['id_service'], $_POST['service'], $_POST['nameService'],'index.php');
+				#echo getHours($_POST['bday'], $_POST['id_service'], $_POST['service'], $_POST['nameService'],'index.php');
 				echo "</div>";
 			} else {
 				if (isset($_POST['box-hour-value'])) { 
@@ -65,9 +66,27 @@
 							echo getAd("./public/images/ads/ad3.jpg", "10% off!", "In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations.", "img");
 						?>
 						<main id="first-booking" class="booking-businness">
-							<?php 
-								echo getBooking('');
-							?>
+							<div class='calendar' id='dataJS' data-module='firstStepBook'>
+								<h2 class='title'>Book An Appoinment</h2>
+								<div class='cal-days'>When Do You Want To Come?</div>
+								<form action='booking' method='post' onsubmit='return validateForm()'>
+									@csrf
+								<div class='cal-time'>Select A Day</div>
+								<?php
+									echo getDatePicker('', '', 'today');
+								?>
+								<div class='cal-time'>Select A Service</div>
+								<div class='cal-cover-services'>
+									<input type='hidden' name='admin-selected' value='10'>
+									<?php
+										echo getServicesAvailablesDB(getServicesDB(''), '');
+									?>
+								</div>
+								<div class='cal-time'></div>
+								<div id='select-service' class='alert-service'>Please Select A Service</div>
+									<input type='submit' id='firstStep' name='firstStep' value='Next Step'>
+								</form>
+							</div>
 						</main>
 			<?php							
 					}
@@ -80,6 +99,6 @@
 			?>
 		</footer>	
 	</div>
-	<script type="text/javascript" src="../resources/js/script.js"></script>
+	<script type="text/javascript" src="./resources/js/script.js"></script>
 </body>
 </html>

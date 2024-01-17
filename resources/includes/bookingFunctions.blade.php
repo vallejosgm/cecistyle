@@ -1,11 +1,12 @@
 <?php
 function getHours($d, $ids, $ds, $ns, $destiny) {
     $nameKey = 'id-service-selected';
-    if ($destiny != 'index.php') $nameKey = 'id-serselected';
+    if ($destiny != 'hoursBooking') $nameKey = 'id-serselected';
     $return = '';
     $return .= "  <h2 class='title'>Book An Appoinment</h2>";
     $return .= "  <div class='cal-days'>When Do You Want To Come?</div>";
-    $return .= "  <form action='".$destiny."' method='post'>";
+    #$return .= "  <form action='".$destiny."' method='post'>";
+    $return .= "  <form action='booking/hoursBooking' method='post'>";
     $return .= "    <div class='cal-time'>Chosen Day</div>";
     $return .= "    <div class='chosen-day'>".date_format(date_create($d),"D, d M Y")."</div>";
     $gHA = getHoursAvailableDB($d);
@@ -32,7 +33,7 @@ function getHours($d, $ids, $ds, $ns, $destiny) {
     $return .= "<div class='calendar' id='dataJS' data-module='thirdStepBook'>";
     $return .= "<h2 class='title'>Book An Appoinment</h2>";
     $return .= "  <div class='cal-days'>Complete your information.</div>";
-    $return .= "<form action='.' method='post' onsubmit='return on_form_sbmt()'>";
+    $return .= "<form action='booking/setHours' method='post' onsubmit='return on_form_sbmt()'>";
     $return .= "  <div class='cal-time'>Your appointment will be the $d at ".date('h:i a', strtotime($h))." with a duration of $s minutes.</div>";
     $return .= "  <input type='text' class='cal-info-hidden' name='dHidden' value='$d'>";
     $return .= "  <input type='text' class='cal-info-hidden' name='hHidden' value='$h'>";
@@ -85,14 +86,16 @@ function getHours($d, $ids, $ds, $ns, $destiny) {
   }
 
   function getBooking($creator) {
-    $goPage = "index.php";
+    $goPage = "booking";
     if($creator == "admin") $goPage = "calendar.php";
     $return = '';
 
     $return .= "<div class='calendar' id='dataJS' data-module='firstStepBook'>";
     $return .= "  <h2 class='title'>Book An Appoinment</h2>";
     $return .= "  <div class='cal-days'>When Do You Want To Come?</div>";
-    $return .= "  <form action='".$goPage."' method='post' onsubmit='return validateForm()'>";
+    #$return .= "  <form action='".$goPage."' method='post' onsubmit='return validateForm()'>";
+    $return .= "  <form action='booking' method='post' onsubmit='return validateForm()'>";
+    $return .= "   @csrf";  
     $return .= "    <div class='cal-time'>Select A Day</div>";
     $return .= getDatePicker('', '', 'today');
     $return .= "    <div class='cal-time'>Select A Service</div>";
