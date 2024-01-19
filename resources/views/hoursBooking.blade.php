@@ -31,16 +31,11 @@
 				echo getNav();
 			@endphp
 		</nav>
-		<div class='calendar' id='dataJS' data-module='secondStepBook'>
-			@php
-					echo getInfo($_POST['date-selected'], $_POST['box-hour-value'], $_POST['id-service-selected'], $_POST['service-selected'], $_POST['name-selected']);
-			@endphp
-            
-		</div>
-        <div class='calendar' id='dataJS' data-module='thirdStepBook'>
+		<div class='calendar' id='dataJS' data-module='thirdStepBook'>
             <h2 class='title'>Book An Appoinment</h2>
             <div class='cal-days'>Complete your information.</div>
-            <form action='confirmBooking' method='post' onsubmit='return on_form_sbmt()'>
+            <form action='email-laravel' method='post' onsubmit='return on_form_sbmt()'>
+                @csrf
                 <div class='cal-time'>Your appointment will be the {{ $dateSelected }} at {{ $boxHourValue }} with a duration of {{ $serviceSelected }} minutes.</div>
                 <input type='text' class='cal-info-hidden' name='dHidden' value={{ $dateSelected }}>
                 <input type='text' class='cal-info-hidden' name='hHidden' value={{ $boxHourValue }}>

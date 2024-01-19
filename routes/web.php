@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\BookingControlller;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HomeController;
+use App\Mail\laravelEmail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,16 +20,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class);
 
-#Route::post('booking', [BookingControlller::class, 'createBooking']);
-
 Route::post('hoursBooking', [BookingControlller::class, 'setHours']);
 
 Route::post('booking', [BookingControlller::class, 'create']);
 
-
-Route::get('booking/chooseHour', function($date, $type){
-    return 'pagina del booking';
-});
+Route::post('email-laravel', [EmailController::class, 'index']);
 
 Route::get('booking/confirm', function(){
     return 'pagina del booking';
