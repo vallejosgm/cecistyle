@@ -31,27 +31,7 @@
 				echo getNav();
 			@endphp
 		</nav>
-		<div class='calendar' id='dataJS' data-module='secondStepBook'>
-			<h2 class='title'>Book An Appoinment</h2>
-			<div class='cal-days'>When Do You Want To Come?</div>
-			<form action='hoursBooking' method='post'>
-				@csrf
-				<div class='cal-time'>Chosen Day</div>
-				<div class='chosen-day'>{{ $bdate }}</div>
-				@php
-					echo getBoxHoursAvailable($hours_available, $service, $bday, 'booking');	
-				@endphp
-				<input type='hidden' name='id-service-selected' value={{ $id_service }}>
-				<input type='hidden' id='service-selected' name='service-selected' value={{ $service }}>
-				<input type='hidden' id='date-selected' name='date-selected' value={{ $bday }}>
-				<input type='hidden' name='name-selected' value={{ $nameService }}>
-				<div class='cal-time'></div>
-				<input type='submit' id='secondStep' name='secondStep' value='Next Step' disabled='true'>
-			</form>
-		</div>
-
 		
-
 		<footer id="f-cover">
 			<?php 
 				echo getFooter();

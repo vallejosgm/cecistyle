@@ -317,31 +317,15 @@ function getHours($d, $ids, $ds, $ns, $destiny) {
     $i = 0;
     $displayServices .= "        <input type='hidden' id='id_service' name='id_service' value='".$vii."'>";
     $displayServices .= "        <input type='hidden' id='name_service' name='nameService' value='".$vin."'>";
-    foreach ($aServices as $key => $value) {
-      $displayServices .= "      <div class='cover-services-columns'>";
-      $displayServices .= "        <input type='radio' onclick='handleClick(this);' id='".$value['id_serv']."' name='service' value='".$value['duration_minutes_serv']."' data-name='".$value['name_serv']."'>";
-      #if($i == 0) {$displayServices .= "checked>";} else {$displayServices .= ">";}
-      $displayServices .= "        <label for='".$value['id_serv']."'>".$value['name_serv']."</label>";
-      $displayServices .= "      </div>";
-      $i = 1;
-    }
+    foreach ($aServices as $service) {
+      if($service->name_serv != 'Admin') {
+        $displayServices .= "      <div class='cover-services-columns'>";
+        $displayServices .= "        <input type='radio' onclick='handleClick(this);' id='".$service->id_serv."' name='service' value='".$service->duration_minutes_serv."' data-name='".$service->name_serv."'>";
+        $displayServices .= "        <label for='".$service->id_serv ."'>".$service->name_serv."</label>";
+        $displayServices .= "      </div>";
+        $i = 1;
+      }
+    } 
     return $displayServices;
-  }
-
-  function getServicesDB($creator) {
-    $con = connectToDB();
-    $sql = 'SELECT id_serv, name_serv, duration_minutes_serv FROM tbl_service ';
-    if($creator == "admin") $sql .= 'ORDER BY priority_serv DESC;';
-    else $sql .= 'WHERE id_serv <> 10 ORDER BY priority_serv;';
-    $results = mysqli_query($con, $sql);
-    if(!mysqli_num_rows($results)) return false;
-    while ($record = mysqli_fetch_array($results, MYSQLI_ASSOC))
-    {
-      $services[] = $record;
-    }
-
-    mysqli_close($con);
-    
-    return $services;
   }
 ?>

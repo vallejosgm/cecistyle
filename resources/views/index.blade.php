@@ -46,7 +46,7 @@
 						$_SESSION['form_token'] == sha1(mt_rand());
 						echo getConfirmation($_POST['fullname'], $_POST['email'], $_POST['phone'], $_POST['dHidden'], $_POST['hHidden'],  $_POST['idsHidden'], $_POST['sHidden'], $_POST['comments'], $_POST['nsHidden']);
 					} else {
-						echo getVideo();
+						echo getVideo($video);
 						echo getAd("./public/images/ads/ad1.jpg", "10% off!", "In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations. In this month of June by your alterations.", "img");
 		?>
 						<main id="photos-gallery" class="gallery-businness">
@@ -79,7 +79,7 @@
 								<div class='cal-cover-services'>
 									<input type='hidden' name='admin-selected' value='10'>
 									<?php
-										echo getServicesAvailablesDB(getServicesDB(''), '');
+										echo getServicesAvailablesDB($services, '');
 									?>
 								</div>
 								<div class='cal-time'></div>
@@ -87,6 +87,7 @@
 									<input type='submit' id='firstStep' name='firstStep' value='Next Step'>
 								</form>
 							</div>
+
 						</main>
 			<?php							
 					}

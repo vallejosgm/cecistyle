@@ -23,9 +23,9 @@ class EmailController extends Controller
             'comments' => $request->input('comments'),
             'nsHidden' => $request->input('nsHidden')
         ];
-        #Mail::to($request->input('email'))->send(new laravelEmail($sendMailData));
         Mail::to('info@cecistyle.org')->send(new laravelEmail($sendMailData));
         Mail::to('castillocecian@gmail.com')->send(new adminLaravelEmail($sendMailData));
+        
         return view('mail.email-laravel')->with('mailData', $sendMailData);
     }
 }

@@ -47,12 +47,12 @@
     return $displayForm;
   }
 
-  function getVideo() {
-    $srcVideo = getSourceVideo();
+  function getVideo($video) {
+    #$srcVideo = getSourceVideo();
     $displayForm = "";
     $displayForm .= ' <main class="main-video">';
     $displayForm .= '   <video loop="" muted="muted" autoplay="">';
-    $displayForm .= '     <source src="./public/videos/'.$srcVideo.'"/>';
+    $displayForm .= '     <source src="'.$video.'"/>';
     $displayForm .= '   </video>';
     $displayForm .= ' </main>';
     
@@ -82,29 +82,6 @@
     $displayForm .= ' </section>';
 
     return $displayForm; 
-  }
-
-  function getSourceVideo()
-  {
-    $values = [];
-    $con = connectToDB();
-    $sql = "SELECT `value` FROM `tbl_settings` WHERE `name`='home_video';";
-    $results = mysqli_query($con, $sql);
-
-    if(!mysqli_num_rows($results)) $return = false;
-
-    while ($record = mysqli_fetch_array($results, MYSQLI_ASSOC))
-    {
-      $values[] = $record;
-    }
-    
-    mysqli_close($con);  
-
-    foreach ($values as $key => $value) {
-      $urlVideo = $value['value'];
-    }
-
-    return $urlVideo;
   }
 
   function getFooter() {
