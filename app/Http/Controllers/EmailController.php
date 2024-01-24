@@ -27,7 +27,7 @@ class EmailController extends Controller
 
         try {
             Mail::to('info@cecistyle.org')->send(new laravelEmail($sendMailData));
-            Mail::to('vallejosgm@gmail.com')->send(new adminLaravelEmail($sendMailData));
+            Mail::to('castillocecian@gmail.com')->send(new adminLaravelEmail($sendMailData));
             $emailSent = 'El customer y administrador recibieron un email de confirmation';
         } catch (\Exception $e) {
             $emailSent = 'false';
