@@ -13,9 +13,9 @@
     $links = '';
     $links .= ' <ul id="h-content-item">';
     $links .= '   <li><a href="index.php">Home</a></li>';
-    $links .= '   <li><a href="#photos-gallery">Gallery</a></li>';
-    $links .= '   <li><a href="#reviews-gallery">Reviews</a></li>';
-    $links .= '   <li><a href="#dataJS">Book an Appointment</a></li>';
+    $links .= '   <li><a href=' . asset('/#photos-gallery') . '>Gallery</a></li>';
+    $links .= '   <li><a href=' . asset('/#reviews-gallery') . '>Reviews</a></li>';
+    $links .= '<li><a href=' . asset('/#dataJS') . '>Book an Appointment</a></li>';
     if(isGranted()) {
       #$links .= '   <li><a href="calendar.php#day_selected">Calendar</a></li>';
       $links .= '   <li><a href="calendar.php">Calendar</a></li>';
@@ -36,7 +36,7 @@
     $displayForm .= '       <a href="index.php">Home</a>';
     $displayForm .= '       <a href="index.php?gallery=true">Gallery</a>';
     $displayForm .= '       <a href="index.php?reviews=true">Reviews</a>';
-    $displayForm .= '       <a href="#dataJS">Book an Appointment</a>';
+    $displayForm .= '       <a href='. asset('/#dataJS') .'>Book an Appointment</a>';
     if(isGranted()) {
       $displayForm .= '   <a href="calendar.php#day_selected">Calendar</a>';
       $displayForm .= '   <a href="logout.php">Logout</a>';

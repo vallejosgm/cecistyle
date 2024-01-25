@@ -29,8 +29,8 @@
 			@endphp
 		</header>
 		<nav class="main-nav">
-			@php 
-				echo getNav();
+			@php
+				echo getNav()
 			@endphp
 		</nav>
 		<?php
