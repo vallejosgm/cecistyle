@@ -163,8 +163,8 @@ function getHours($d, $ids, $ds, $ns, $destiny) {
 
   function noHoursAvailable($displayBox, $destiny) {
     $nameBtn = 'Book an appointment';
-    if ($destiny != 'index.php') $nameBtn = 'Create Event';
-    $displayBox .= "<div class='cal-time'>There are no hours available for this date. Click on the '".$nameBtn."' button and select another date.</div>";
+    if ($destiny != 'booking') $nameBtn = 'Create Event';
+    $displayBox .= "<div class='cal-time'>There are no hours available for this date. Click on the '".$nameBtn."' and select another date.</div>";
     $displayBox .= "<div class='cover-contenthours'></div>";
 
     return $displayBox;
@@ -189,24 +189,25 @@ function getHours($d, $ids, $ds, $ns, $destiny) {
   }
 
   function markBusyHours($busyHours, $arrayHoursDay, $arrayHoursAvailable, $durationService, $dateAppo) {
-    $j=0;
-    foreach ($busyHours as $key => $value) {
-        $j = array_search(substr($value["hour_start_appo"], 0, -3), $arrayHoursDay); #I get initial index to mark like busy on $arrayHoursDay
-        $interval = date_diff(date_create($value["hour_start_appo"]), date_create($value["hour_end_appo"])); #difference in minutes between start and end hours 
-        $quantityThirtyMinutes = (($interval->h * 60) + ($interval->i))/30; #The difference in minutes total and divided in package of 30 minutes
-        for($i = 0; $i < $quantityThirtyMinutes; $i++) $arrayHoursAvailable[$j + $i] = "busy"; #Put busy on $arrayHoursDay
+    $j = 0;
+    foreach ($busyHours as $value) {
+        $j = array_search(substr($value->hour_start_appo, 0, -3), $arrayHoursDay); // Accede a las propiedades como objeto
+        $interval = date_diff(date_create($value->hour_start_appo), date_create($value->hour_end_appo));
+        $quantityThirtyMinutes = (($interval->h * 60) + ($interval->i)) / 30;
+        for ($i = 0; $i < $quantityThirtyMinutes; $i++) $arrayHoursAvailable[$j + $i] = "busy";
     }
 
-    if($durationService == "60") {
-        for ($i=0; $i < count($arrayHoursAvailable); $i++) { 
-          if (($arrayHoursAvailable[$i] == "busy") && ($i != 0)) {
-            $arrayHoursAvailable[$i - 1] = "busy";
-          }
+    if ($durationService == "60") {
+        for ($i = 0; $i < count($arrayHoursAvailable); $i++) {
+            if (($arrayHoursAvailable[$i] == "busy") && ($i != 0)) {
+                $arrayHoursAvailable[$i - 1] = "busy";
+            }
         }
     }
 
     return $arrayHoursAvailable;
-  }
+}
+
 
   function getHoursLikeBoxes($arrayHoursAvailableWithFilter, $displayBox, $arrayHoursDay, $destiny) {
     $ti = 'radio';
@@ -244,26 +245,6 @@ function getHours($d, $ids, $ds, $ns, $destiny) {
     }
 
     return $displayBox;
-  }
-
-  function saveAppointmentDB($d, $h, $e, $p, $fn, $m, $ids, $ds) {
-    $return = false;
-    $con = connectToDB();
-    if ($ds == "60") {
-      $he = date('H:i', strtotime($h. ' +60 minutes'));
-    } else {
-      $he = date('H:i', strtotime($h. ' +30 minutes'));
-    }
-     
-    $sql = "INSERT INTO `tbl_app_no_sign` (`date_appo`, `hour_start_appo`, `hour_end_appo`, `email`, `phone`, `fullname`, `message`, `id_serv`) VALUES ('".$d."', '".$h."', '".$he."', '".$e."', ".$p.", '".$fn."', '".$m."', ".$ids.");";
-    //RUN THE COMMAND
-    if(mysqli_query($con, $sql) == true) $return = true;
-    else $return = false;
-
-    //CLOSING CONNECTION
-    mysqli_close($con);
-
-   return $return; 
   }
 
   function getDatePicker($d, $dis, $min) {
