@@ -29,7 +29,7 @@
 		<nav class="main-nav">
 			<ul id="h-content-item">
                 <li><a href="index.php">Home</a></li>
-                <li><a href="calendar.php">Calendar</a></li>
+                <li><a href="{{ route('calendar') }}">Calendar</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
@@ -43,7 +43,7 @@
                 <label id="iomenu" for="toogle">☰</label>
                 <div class="menu">
                     <a href="index.php">Home</a>
-                    <a href="calendar.php#day_selected">Calendar</a>
+                    <a href="{{ route('calendar') }}">Calendar</a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         @method('DELETE')

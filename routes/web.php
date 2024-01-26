@@ -1,6 +1,6 @@
 <?php
 
-#use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\LoginHomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingControlller;
@@ -43,7 +43,7 @@ Route::group(['middleware' => 'guest'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('loginHome', [LoginHomeController::class, 'index']);
-    #Route::get('calendar', [CalendarController::class, 'index']);
+    Route::get('calendar', [CalendarController::class, 'index'])->name('calendar');
     Route::get('/login', function() {
         return view('loginHome');
     })->name('login');
