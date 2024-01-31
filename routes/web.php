@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\ApptsNoSignController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\LoginHomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingControlller;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;
+
 use App\Mail\laravelEmail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
@@ -37,18 +38,22 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
     Route::get('/login', [AuthController::class, 'login'])->name('login');
+    
     Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
+    
 });
 
 
 Route::group(['middleware' => 'auth'], function () {
+   
     Route::get('loginHome', [LoginHomeController::class, 'index']);
     Route::get('calendar', [CalendarController::class, 'index'])->name('calendar');
-    Route::get('/login', function() {
-        return view('loginHome');
-    })->name('login');
-    Route::get('/register', function() {
-        return view('loginHome');
-    })->name('register');
-    Route::delete('logout', [AuthController::class, 'logout'])->name('logout');    
+    Route::post('apptcreate', [ApptsNoSignController::class, 'create'])->name('apptcreate');
+    Route::post('setHoursBooking', [ApptsNoSignController::class, 'setHours'])->name('setHoursBooking');
+    Route::post('confirmAppt', [ApptsNoSignController::class, 'confirmData'])->name('confirmAppt');
+    Route::post('saveAppts', [ApptsNoSignController::class, 'saveAppts'])->name('saveAppts');
+    #Route::get('/login', function() { return view('loginHome'); })->name('login');
+    #Route::get('/register', function() { return view('loginHome'); })->name('register');
+    Route::delete('logout', [AuthController::class, 'logout'])->name('logout');
+    
 });

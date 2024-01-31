@@ -2,7 +2,7 @@
   function getLogo() {
     $links = '';
     $links .= ' <div class="logo">';
-    $links .= '   <img src="./public/images/logo.png">';
+    $links .= '   <img src=' . asset( '/public/images/logo.png' ) . '>';
     $links .= ' </div>';
 
     return $links;
@@ -12,7 +12,7 @@
 
     $links = '';
     $links .= ' <ul id="h-content-item">';
-    $links .= '   <li><a href="index.php">Home</a></li>';
+    $links .= '   <li><a href=' . asset('/') . '>Home</a></li>';
     $links .= '   <li><a href=' . asset('/#photos-gallery') . '>Gallery</a></li>';
     $links .= '   <li><a href=' . asset('/#reviews-gallery') . '>Reviews</a></li>';
     $links .= '<li><a href=' . asset('/#dataJS') . '>Book an Appointment</a></li>';

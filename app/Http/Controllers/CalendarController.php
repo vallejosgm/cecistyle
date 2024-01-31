@@ -8,6 +8,30 @@ use Illuminate\Support\Facades\Redirect;
 
 class CalendarController extends Controller
 {
+    private function getAppt($months, $years)
+    {
+        $appts = [];
+
+        for ($j = 0; $j < 12; $j++) {
+            $result = DB::select("SELECT `id_appo`, `date_appo`, `hour_start_appo`, `hour_end_appo`, 
+            `services`.`id_serv` AS 'idService', `services`.`name_serv` AS 'nameService', 
+            CONCAT(CAST(`services`.`name_serv` AS CHAR), ' ', CAST(`fullName` AS CHAR), ' ', 
+            CAST(`message` AS CHAR)) AS 'Description', `email`, `phone`, `fullName`, DAY(`date_appo`) AS 'Day', 
+            MONTH(`date_appo`) AS 'Month', `message`  FROM `apps_no_sign`, `services` 
+            WHERE `apps_no_sign`.`id_serv` = `services`.`id_serv` AND (YEAR(`date_appo`) = ? 
+            AND MONTH(`date_appo`) = ?) ORDER BY YEAR(`date_appo`), MONTH(`date_appo`), DAY(`date_appo`), 
+            `hour_start_appo`;", [$years[$j], $months[$j]]);
+            // Asegúrate de que la consulta haya devuelto resultados antes de intentar acceder a ellos
+            if (!empty($result)) {
+                $appts[$j] = $result;
+            } else {
+                $appts[$j] = null; // O maneja este caso según tus necesidades
+            }
+        }
+        // Pasa los resultados a la vista
+        return $appts;
+    }
+    
     public function index() {
 
         $displayForm = "";
@@ -99,30 +123,7 @@ class CalendarController extends Controller
                         </script>';
 
         return view('calendar', ['displayForm' => $displayForm]);
-        #return Redirect::to('calendar#day_selected')->with(['displayForm' => $displayForm]);
     }
 
-    private function getAppt($months, $years)
-    {
-        $appts = [];
-
-        for ($j = 0; $j < 12; $j++) {
-            $result = DB::select("SELECT `id_appo`, `date_appo`, `hour_start_appo`, `hour_end_appo`, 
-            `services`.`id_serv` AS 'idService', `services`.`name_serv` AS 'nameService', 
-            CONCAT(CAST(`services`.`name_serv` AS CHAR), ' ', CAST(`fullName` AS CHAR), ' ', 
-            CAST(`message` AS CHAR)) AS 'Description', `email`, `phone`, `fullName`, DAY(`date_appo`) AS 'Day', 
-            MONTH(`date_appo`) AS 'Month', `message`  FROM `apps_no_sign`, `services` 
-            WHERE `apps_no_sign`.`id_serv` = `services`.`id_serv` AND (YEAR(`date_appo`) = ? 
-            AND MONTH(`date_appo`) = ?) ORDER BY YEAR(`date_appo`), MONTH(`date_appo`), DAY(`date_appo`), 
-            `hour_start_appo`;", [$years[$j], $months[$j]]);
-            // Asegúrate de que la consulta haya devuelto resultados antes de intentar acceder a ellos
-            if (!empty($result)) {
-                $appts[$j] = $result;
-            } else {
-                $appts[$j] = null; // O maneja este caso según tus necesidades
-            }
-        }
-        // Pasa los resultados a la vista
-        return $appts;
-    }
+    
 }

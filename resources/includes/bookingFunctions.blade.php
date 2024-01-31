@@ -212,7 +212,7 @@ function getHours($d, $ids, $ds, $ns, $destiny) {
   function getHoursLikeBoxes($arrayHoursAvailableWithFilter, $displayBox, $arrayHoursDay, $destiny) {
     $ti = 'radio';
     $ni = 'box-hour-value';
-    if ($destiny == 'calendar.php') {
+    if ($destiny == 'Admin') {
         $ti = 'checkbox';
         $ni = 'box-hour-value[]'; 
     } 
@@ -295,16 +295,22 @@ function getHours($d, $ids, $ds, $ns, $destiny) {
       $vin = 'Admin';  
     }
     $displayServices = '';
-    $i = 0;
     $displayServices .= "        <input type='hidden' id='id_service' name='id_service' value='".$vii."'>";
     $displayServices .= "        <input type='hidden' id='name_service' name='nameService' value='".$vin."'>";
     foreach ($aServices as $service) {
-      if($service->name_serv != 'Admin') {
+      if($creator == 'admin') {
         $displayServices .= "      <div class='cover-services-columns'>";
-        $displayServices .= "        <input type='radio' onclick='handleClick(this);' id='".$service->id_serv."' name='service' value='".$service->duration_minutes_serv."' data-name='".$service->name_serv."'>";
+        $displayServices .= "        <input type='radio' onclick='handleClick(this);' id='".$service->id_serv."' name='service' value='".$service->duration_minutes_serv."' data-name='".$service->name_serv."' ";
+        if($service->name_serv == 'Admin') {$displayServices .= "checked>";} else {$displayServices .= ">";}
         $displayServices .= "        <label for='".$service->id_serv ."'>".$service->name_serv."</label>";
         $displayServices .= "      </div>";
-        $i = 1;
+      } else {
+        if($service->name_serv != 'Admin') {
+          $displayServices .= "      <div class='cover-services-columns'>";
+          $displayServices .= "        <input type='radio' onclick='handleClick(this);' id='".$service->id_serv."' name='service' value='".$service->duration_minutes_serv."' data-name='".$service->name_serv."'>";
+          $displayServices .= "        <label for='".$service->id_serv ."'>".$service->name_serv."</label>";
+          $displayServices .= "      </div>";
+        }
       }
     } 
     return $displayServices;

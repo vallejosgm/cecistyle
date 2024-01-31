@@ -57,7 +57,8 @@
 		
         <div class="contentCal">
             <div class="headerCal">
-                <form action="calendar.php" method="POST">
+                <form action="{{ route('apptcreate') }}" method="POST">
+                    @csrf
                     <input type="submit" class="createButton" name="createButton" value="Create Event"/>
                 </form>
             </div>
@@ -105,40 +106,26 @@
                                   $ns = $_POST['nameServ'];
                                   echo confirmRemove($id, $d, $hs, $he, $e, $p, $fn, $m, $ns);
                                } else {
-                                   if (isset($_POST['sendNew']))
-                                  {
-                                      $d = $_POST['bday'];
-                                          $hs = $_POST['hoursStartAppt'];
-                                          $he = $_POST['hoursEndAppt'];
-                                          $e = $_POST['emailAppt'];
-                                          $p = $_POST['phoneAppt'];
-                                          $fn = $_POST['nameAppt'];
-                                          $m = $_POST['messageAppt'];
-                                          $is = $_POST['idService'];
-                                          saveNewRowArrays($d, $hs, $he, $e, $p, $fn, $m, $is);
-                                  } else{
-                                       if (isset($_POST['sendEdit']))
-                                      {
-                                          $id = $_POST['idAppt'];
-                                          $d = $_POST['bday'];
-                                          $hs = $_POST['hoursStartAppt'];
-                                          $he = $_POST['hourEndAppt'];
-                                          $e = $_POST['emailAppt'];
-                                          $p = $_POST['phoneAppt'];
-                                          $fn = $_POST['nameAppt'];
-                                          $m = $_POST['messageAppt'];
-                                          $is = $_POST['idService'];
-                                          updateRow($id, $d, $hs, $he, $e, $p, $fn, $m, $is);
-                                      } else {
-                                          if (isset($_POST['sendDelete']))
-                                          {
-                                              $id = $_POST['idAppt'];
-                                              deleteRow($id);
-                                          }
-                                      }
-                                  }
-                                  #echo getContentCal();
-                                  echo $displayForm;
+                                    if (isset($_POST['sendEdit']))
+                                    {
+                                        $id = $_POST['idAppt'];
+                                        $d = $_POST['bday'];
+                                        $hs = $_POST['hoursStartAppt'];
+                                        $he = $_POST['hourEndAppt'];
+                                        $e = $_POST['emailAppt'];
+                                        $p = $_POST['phoneAppt'];
+                                        $fn = $_POST['nameAppt'];
+                                        $m = $_POST['messageAppt'];
+                                        $is = $_POST['idService'];
+                                        updateRow($id, $d, $hs, $he, $e, $p, $fn, $m, $is);
+                                    } else {
+                                        if (isset($_POST['sendDelete']))
+                                        {
+                                            $id = $_POST['idAppt'];
+                                            deleteRow($id);
+                                        }
+                                    }
+                                    echo $displayForm;
                                }
                            }
                        }
