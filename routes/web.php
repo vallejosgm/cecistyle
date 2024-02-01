@@ -52,6 +52,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('setHoursBooking', [ApptsNoSignController::class, 'setHours'])->name('setHoursBooking');
     Route::post('confirmAppt', [ApptsNoSignController::class, 'confirmData'])->name('confirmAppt');
     Route::post('saveAppts', [ApptsNoSignController::class, 'saveAppts'])->name('saveAppts');
+    Route::post('confirmRemove', [ApptsNoSignController::class, 'confirmRemove'])->name('confirmRemove');
+    Route::post('removeAppts', [ApptsNoSignController::class, 'removeAppts'])->name('removeAppts');
+    Route::post('editData', [ApptsNoSignController::class, 'editData'])->name('editData');
+    Route::post('updateAppts', [ApptsNoSignController::class, 'updateAppts'])->name('updateAppts');
     #Route::get('/login', function() { return view('loginHome'); })->name('login');
     #Route::get('/register', function() { return view('loginHome'); })->name('register');
     Route::delete('logout', [AuthController::class, 'logout'])->name('logout');

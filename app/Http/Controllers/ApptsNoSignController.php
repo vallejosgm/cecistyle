@@ -111,6 +111,9 @@ class ApptsNoSignController extends Controller
         $displayForm .= '<form action='. route('saveAppts') .' method="POST" class="tblAppt">'.csrf_field();
         $displayForm .= ' <div class="column">';
         $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <h2 class="title" style="margin-top: 0;">Create Appointment</h2>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
         $displayForm .= '     <label for="dateAppt">Date of Appointment</label>';
         $displayForm .= '      <div class="cal-time" name="dateAppt">'.$data['dateSelected'].'</div>';
         $displayForm .= '      <input type="hidden" value="'.$data['dateSelected'].'" name="bday"/>';
@@ -145,7 +148,6 @@ class ApptsNoSignController extends Controller
         $displayForm .= '      <input type="hidden" value="'.$data['idSerSelected'].'" name="idService"/>';
         $displayForm .= '   </div>';
         $displayForm .= '   <div class="column-flex btnSave">';
-        $displayForm .= '     <input type="submit" value="Cancel" class="cancelBtn"/>';
         $displayForm .= '     <input type="submit" value="Save New" name="sendNew"  class="saveBtn"/>';
         $displayForm .= '   </div>';
         $displayForm .= ' </div>';
@@ -187,4 +189,90 @@ class ApptsNoSignController extends Controller
         ]);
 
     }
+
+    public function confirmRemove(Request $request) {
+        $id = $request->input('rowID');
+        $d = $request->input('dateAppt');
+        $hs = $request->input('hs');
+        $he = $request->input('he');
+        $e = $request->input('email');
+        $p = $request->input('phone');
+        $fn = $request->input('fn');
+        $m = $request->input('mess');
+        $ns = $request->input('nameServ');
+
+        $displayForm = "";
+        $displayForm .= '<form action='. route('removeAppts') .' method="POST" class="tblAppt">'.csrf_field();
+        $displayForm .= ' <div class="column">';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <h2 class="title" style="margin-top: 0;">Delete of Appointment</h2>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label for="dateAppt">Date of Appointment</label>';
+        $displayForm .= '     <input class="field" type="text" value='.$d.'  name="dateAppt" readonly/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label  for="hoursStartAppt">Hour Start</label>';
+        $displayForm .= '     <input class="field" type="text" value='.$hs.' name="hoursStartAppt" readonly/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label  for="hourEndAppt">Hour End</label>';
+        $displayForm .= '     <input class="field" type="text" value='.$he.' name="hourEndAppt" readonly/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label  for="emailAppt">Email</label>';
+        $displayForm .= '     <input class="field" type="text" value='.$e.' name="emailAppt" readonly/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label for="phoneAppt">Phone Number</label>';
+        $displayForm .= '     <input class="field" type="text" value='.$p.' name="phoneAppt" readonly/>';
+        $displayForm .= '   </div>';
+        $displayForm .= ' </div>';
+        $displayForm .= ' <div class="column">';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label for="nameAppt">Full Name</label>';
+        $displayForm .= '     <input class="field" type="text" value='.$fn.' name="nameAppt" readonly/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label for="messageAppt">Message</label>';
+        $displayForm .= '     <input class="field" type="text" value="'.$m.'" name="messageAppt" readonly/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label for="idService">Service</label>';
+        $displayForm .= '     <input type="text" value='.$ns.' name="serviceAppt" readonly/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column" btnSave style="display: inline-grid; justify-content: center;">';
+        $displayForm .= '     <span>Do you want delete this record?</span>';
+        $displayForm .= '     <input type="submit" value="Yes" name="sendDelete"/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '     <input type="hidden" value='.$id.' name="idAppt"/>';
+        $displayForm .= '</form>';
+
+        
+        return view('removeAppts')->with([
+            'displayForm' => $displayForm,
+        ]); 
+    }
+
+    public function removeAppts(Request $request) {
+        $id = $request->input('idAppt');
+
+        DB::beginTransaction();
+        
+        try {
+            DB::delete('DELETE FROM apps_no_sign WHERE id_appo = ?', [$id]);
+            DB::commit(); // Confirma las transacciones si no hubo excepciones
+            $confirmationMessage = 'Se eliminó el appointment en la base de datos';
+        } catch (\Exception $e) {
+            DB::rollback(); // Deshace las transacciones en caso de error
+            $confirmationMessage = 'false';
+            dd($e->getMessage());
+        }
+        
+        return redirect()->route('calendar')->with([
+            'confirmationMessage' => $confirmationMessage,
+        ]);    
+    }
+
+
 }

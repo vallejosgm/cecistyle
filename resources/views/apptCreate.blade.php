@@ -59,8 +59,8 @@
             <div class="headerCal">
                 <input type="submit" class="createButton" name="createButton" value="Create Event"/>
             </div>
-            <div class='calendar' id='bodyCal' data-module='firstStepBook'>
-                <div class='calendar' id='dataJS' data-module='firstStepBook'>
+            <div class='calendar' id='bodyCal' data-module='firstStepBook' style="padding-top: 0;">
+                <div class='calendar' id='dataJS' data-module='firstStepBook' style="padding-top: 0;">
                     <h2 class='title'>Book An Appoinment</h2>
                     <div class='cal-days'>When Do You Want To Come?</div>
                     <form action='{{ route('setHoursBooking') }}' method='post' onsubmit='return validateForm()'>

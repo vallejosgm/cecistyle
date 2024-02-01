@@ -62,7 +62,7 @@
                     <input type="submit" class="createButton" name="createButton" value="Create Event"/>
                 </form>
             </div>
-            <div class='calendar' id='bodyCal' data-module='secondStepBook'>
+            <div class='calendar' id='bodyCal' data-module='secondStepBook' style="padding-top: 0;">
                 <h2 class='title'>Book An Appoinment</h2>
                 <div class='cal-days'>When Do You Want To Come?</div>
                 <form action=" {{ route('confirmAppt') }} " method='post'>

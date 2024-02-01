@@ -62,13 +62,13 @@
                     <input type="submit" class="createButton" name="createButton" value="Create Event"/>
                 </form>
             </div>
-            <div class='calendar' id='bodyCal' data-module='secondStepBook' style="padding-top: 0;">
+            <div class='calendar' id='bodyCal' data-module='secondStepBook'>
                 {!! $displayForm !!}
-                <form action=" {{ route('calendar') }}" method="GET" class="tblAppt" style="margin: 0%">
+                <form action=" {{ route('calendar') }}" method="GET" class="tblAppt" style="margin: 12px;">
                     @csrf
-                    <input type="submit" value="Cancel" class="cancelBtn" style="margin: 0%"/>
+                    <input type="submit" value="No"/>
                 </form>
-            </div>
+            </div>    
         </div>
         <footer id="f-cover">
 			<?php 
