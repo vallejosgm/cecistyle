@@ -126,6 +126,7 @@
                                         }
                                     }
                                     echo $displayForm;
+                                    
                                }
                            }
                        }
@@ -133,6 +134,7 @@
                       
                    }
             ?>
+            
         </div>
         <footer id="f-cover">
 			<?php 
@@ -141,6 +143,17 @@
 		</footer>	
 	</div>
 	<script type="text/javascript" src="./resources/js/calendar.js" defer></script>
+    <script type="text/javascript">
+        
+            var element = document.getElementById("day_selected");
+            if (typeof(element) === "undefined" || element === null) {
+                document.getElementById("month").id = "day_selected";
+            }
     
+            function editFunction(id) { 
+                window.location.href = "{{ route('editData') }}?id=" + id;
+            }
+        
+    </script>
 </body>
 </html>

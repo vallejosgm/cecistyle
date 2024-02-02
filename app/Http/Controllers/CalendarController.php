@@ -81,8 +81,9 @@ class CalendarController extends Controller
                 $displayForm .= '      <div class="titleMonth" id="'.$monthSelected.'">'.date('M', strtotime('1-'.$months[$k].'-'.$years[$k])).' '.$years[$k].'</div>';
                 $displayForm .= '        <div class="eventsCal">';
                 foreach($appts[$k] as $x => $val) {
-                    $displayForm .= '<form action='. route('confirmRemove') .' method="POST">'.csrf_field();
-                    $displayForm .= '          <div class="eventCal">';
+                    $displayForm .= '<div class="eventCal">';
+                    $displayForm .= '<form action='. route('confirmRemove') .' method="POST" style="margin-right: 0;">'.csrf_field();
+                    $displayForm .= '          <div class="eventCal" style="margin-right: 0;">';
                     if ($months[$k] == date_format($today,"m") && $val->Day == date_format($today,"d")) $daySelected = "day_selected";
                     else $daySelected = "";
                     if($dayNoRepeat == $val->Day.'-'.$months[$k].'-'.$years[$k]) {
@@ -107,9 +108,11 @@ class CalendarController extends Controller
                     $displayForm .= '            <input type="hidden" value="'.$val->idService.'" name="idServ"/>';
                     $displayForm .= '            <input type="hidden" value="'.$val->nameService.'" name="nameServ"/>';
                     $displayForm .= '            <button type="submit" name="rowRemove" class="cal btn remove">&#x2613;</button>';
-                    $displayForm .= '            <button type="submit" name="rowEdit" class="cal btn edit" onclick="editFunction()">&#x270E;</button>';
+                    
                     $displayForm .= '          </div>';
                     $displayForm .= '</form>';
+                    $displayForm .= '    <button type="button" name="rowEdit" class="cal btn edit" onclick="editFunction('.$val->id_appo.')">&#x270E;</button>';
+                    $displayForm .= '</div>'; 
                 }
 
                 $displayForm .= '        </div>';
@@ -118,11 +121,7 @@ class CalendarController extends Controller
         }
         
         $displayForm .= '      </div>';
-        $displayForm .= '<script type="text/JavaScript"> 
-                            var element =  document.getElementById("day_selected");
-                            if (typeof(element) == "undefined" || element == null) document.getElementById("month").id = "day_selected";
-                            function editFunction() { window.location.href ='. route('editData') .';}
-                        </script>';
+        
 
         return view('calendar', ['displayForm' => $displayForm]);
     }

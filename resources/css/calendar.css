@@ -120,6 +120,18 @@ label.lbl, input.field, input.cancelBtn, input.saveBtn, select.field {
     width: 50%;
 }
 
+#idService {
+	width: 100% !important;
+    padding: 4px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #39393c;
+    box-sizing: border-box;
+    font-size: 17px;
+    border-radius: 25px;
+    color: #39393c;
+}
+
 input.cancelBtn {
 	margin-bottom: 10px !important;
 }

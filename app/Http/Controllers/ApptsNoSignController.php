@@ -7,6 +7,8 @@ use App\Models\ApptsNoSign;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
+use function Ramsey\Uuid\v1;
+
 class ApptsNoSignController extends Controller
 {
     public function create()
@@ -176,10 +178,10 @@ class ApptsNoSignController extends Controller
                 fullname, message, id_serv)VALUES (?,?,?,?,?,?,?,?)", [$bday, $hoursStartAppt[$i], $hoursEndAppt[$i], 
                 $emailAppt, $phoneAppt, $nameAppt, $messageAppt, $idService]);
 
-            DB::commit(); // Confirma las transacciones si no hubo excepciones
+            DB::commit(); 
             $confirmationMessage = 'Se guardó el appointment en la base de datos';
         } catch (\Exception $e) {
-            DB::rollback(); // Deshace las transacciones en caso de error
+            DB::rollback(); 
             $confirmationMessage = 'false';
             dd($e->getMessage());
         }
@@ -209,37 +211,37 @@ class ApptsNoSignController extends Controller
         $displayForm .= '   </div>';
         $displayForm .= '   <div class="column-flex">';
         $displayForm .= '     <label for="dateAppt">Date of Appointment</label>';
-        $displayForm .= '     <input class="field" type="text" value='.$d.'  name="dateAppt" readonly/>';
+        $displayForm .= '     <input class="field" type="text" value='.$d.'  name="dateAppt"/>';
         $displayForm .= '   </div>';
         $displayForm .= '   <div class="column-flex">';
         $displayForm .= '     <label  for="hoursStartAppt">Hour Start</label>';
-        $displayForm .= '     <input class="field" type="text" value='.$hs.' name="hoursStartAppt" readonly/>';
+        $displayForm .= '     <input class="field" type="text" value='.$hs.' name="hoursStartAppt"/>';
         $displayForm .= '   </div>';
         $displayForm .= '   <div class="column-flex">';
         $displayForm .= '     <label  for="hourEndAppt">Hour End</label>';
-        $displayForm .= '     <input class="field" type="text" value='.$he.' name="hourEndAppt" readonly/>';
+        $displayForm .= '     <input class="field" type="text" value='.$he.' name="hourEndAppt"/>';
         $displayForm .= '   </div>';
         $displayForm .= '   <div class="column-flex">';
         $displayForm .= '     <label  for="emailAppt">Email</label>';
-        $displayForm .= '     <input class="field" type="text" value='.$e.' name="emailAppt" readonly/>';
+        $displayForm .= '     <input class="field" type="text" value='.$e.' name="emailAppt"/>';
         $displayForm .= '   </div>';
         $displayForm .= '   <div class="column-flex">';
         $displayForm .= '     <label for="phoneAppt">Phone Number</label>';
-        $displayForm .= '     <input class="field" type="text" value='.$p.' name="phoneAppt" readonly/>';
+        $displayForm .= '     <input class="field" type="text" value='.$p.' name="phoneAppt"/>';
         $displayForm .= '   </div>';
         $displayForm .= ' </div>';
         $displayForm .= ' <div class="column">';
         $displayForm .= '   <div class="column-flex">';
         $displayForm .= '     <label for="nameAppt">Full Name</label>';
-        $displayForm .= '     <input class="field" type="text" value='.$fn.' name="nameAppt" readonly/>';
+        $displayForm .= '     <input class="field" type="text" value='.$fn.' name="nameAppt"/>';
         $displayForm .= '   </div>';
         $displayForm .= '   <div class="column-flex">';
         $displayForm .= '     <label for="messageAppt">Message</label>';
-        $displayForm .= '     <input class="field" type="text" value="'.$m.'" name="messageAppt" readonly/>';
+        $displayForm .= '     <input class="field" type="text" value="'.$m.'" name="messageAppt"/>';
         $displayForm .= '   </div>';
         $displayForm .= '   <div class="column-flex">';
         $displayForm .= '     <label for="idService">Service</label>';
-        $displayForm .= '     <input type="text" value='.$ns.' name="serviceAppt" readonly/>';
+        $displayForm .= '     <input type="text" value='.$ns.' name="serviceAppt"/>';
         $displayForm .= '   </div>';
         $displayForm .= '   <div class="column" btnSave style="display: inline-grid; justify-content: center;">';
         $displayForm .= '     <span>Do you want delete this record?</span>';
@@ -261,10 +263,10 @@ class ApptsNoSignController extends Controller
         
         try {
             DB::delete('DELETE FROM apps_no_sign WHERE id_appo = ?', [$id]);
-            DB::commit(); // Confirma las transacciones si no hubo excepciones
+            DB::commit(); 
             $confirmationMessage = 'Se eliminó el appointment en la base de datos';
         } catch (\Exception $e) {
-            DB::rollback(); // Deshace las transacciones en caso de error
+            DB::rollback(); 
             $confirmationMessage = 'false';
             dd($e->getMessage());
         }
@@ -274,5 +276,111 @@ class ApptsNoSignController extends Controller
         ]);    
     }
 
+    public function editData(Request $request) {
+        $id = $request->query('id');
+        $registro = DB::select("SELECT * FROM apps_no_sign WHERE id_appo = ?", [$id]);
+        //dd($registro);
+        $d = $registro[0]->date_appo;
+        $hs = $registro[0]->hour_start_appo;
+        $he = $registro[0]->hour_end_appo;
+        $e = $registro[0]->email;
+        $p = $registro[0]->phone;
+        $fn = $registro[0]->fullName;
+        $m = $registro[0]->message;
+        $ns = $registro[0]->id_serv;
 
+
+        $displayForm = "";
+        $displayForm .= '<form action='. route('updateAppts') .' method="POST" class="tblAppt">'.csrf_field();
+        $displayForm .= ' <div class="column">';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <h2 class="title" style="margin-top: 0;">Edition of Appointment</h2>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label for="dateAppt">Date of Appointment</label>';
+        $displayForm .= '     <input class="field" type="text" value='.$d.'  name="dateAppt"/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label  for="hoursStartAppt">Hour Start</label>';
+        $displayForm .= '     <input class="field" type="text" value='.$hs.' name="hoursStartAppt"/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label  for="hourEndAppt">Hour End</label>';
+        $displayForm .= '     <input class="field" type="text" value='.$he.' name="hourEndAppt"/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label  for="emailAppt">Email</label>';
+        $displayForm .= '     <input class="field" type="text" value='.$e.' name="emailAppt"/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label for="phoneAppt">Phone Number</label>';
+        $displayForm .= '     <input class="field" type="text" value='.$p.' name="phoneAppt"/>';
+        $displayForm .= '   </div>';
+        $displayForm .= ' </div>';
+        $displayForm .= ' <div class="column">';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label for="nameAppt">Full Name</label>';
+        $displayForm .= '     <input class="field" type="text" value='.$fn.' name="nameAppt"/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '   <div class="column-flex">';
+        $displayForm .= '     <label for="messageAppt">Message</label>';
+        $displayForm .= '     <input class="field" type="text" value="'.$m.'" name="messageAppt"/>';
+        $displayForm .= '   </div>';
+        $services = DB::select('SELECT id_serv, name_serv FROM services ORDER BY priority_serv');
+        $displayForm .= '<div class="column-flex">';
+        $displayForm .= '  <label for="idService">Service</label>';
+        $displayForm .= '  <select id="idService" name="idService">';
+        foreach ($services as $service) {
+            $selected = ($service->id_serv == $ns) ? 'selected' : ''; //Marca como seleccionado si coincide con el valor actual
+            $displayForm .= '  <option value="' . $service->id_serv . '" ' . $selected . '>' . $service->name_serv . '</option>';
+        }       
+        $displayForm .= '  </select>';
+        $displayForm .= '</div>';        
+        $displayForm .= '   <div class="column" btnSave style="display: inline-grid; justify-content: center;">';
+        $displayForm .= '     <span>Do you want update this record?</span>';
+        $displayForm .= '     <input type="submit" value="Yes" name="sendEdit"/>';
+        $displayForm .= '   </div>';
+        $displayForm .= '     <input type="hidden" value='.$id.' name="idAppt"/>';
+        $displayForm .= '</form>';
+
+        #return view('editAppts');
+        return view('editAppts')->with([
+            'displayForm' => $displayForm,
+        ]); 
+
+
+    }
+
+    public function updateAppts(Request $request) {
+        //dd($request);
+        $dateAppt = $request->input('dateAppt');
+        $hoursStartAppt = $request->input('hoursStartAppt');
+        $hourEndAppt = $request->input('hourEndAppt');
+        $emailAppt = $request->input('emailAppt');
+        $phoneAppt = $request->input('phoneAppt');
+        $nameAppt = $request->input('nameAppt');
+        $messageAppt = $request->input('messageAppt');
+        $idServiceAppt = $request->input('idService');
+        $id = $request->input('idAppt');
+        
+        
+
+        DB::beginTransaction();
+        
+        try {
+            DB::update('UPDATE apps_no_sign SET date_appo = ?, hour_start_appo = ?, hour_end_appo = ?, email = ?, phone = ?,
+            fullname = ?, message = ?, id_serv =? WHERE id_appo = ?', [$dateAppt, $hoursStartAppt, $hourEndAppt, $emailAppt, 
+            $phoneAppt, $nameAppt, $messageAppt, $idServiceAppt, $id]);
+            DB::commit(); 
+            $confirmationMessage = 'Se eliminó el appointment en la base de datos';
+        } catch (\Exception $e) {
+            DB::rollback(); 
+            $confirmationMessage = 'false';
+            dd($e->getMessage());
+        }
+        
+        return redirect()->route('calendar')->with([
+            'confirmationMessage' => $confirmationMessage,
+        ]); 
+    }
 }

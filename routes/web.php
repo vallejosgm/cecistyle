@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('confirmRemove', [ApptsNoSignController::class, 'confirmRemove'])->name('confirmRemove');
     Route::post('removeAppts', [ApptsNoSignController::class, 'removeAppts'])->name('removeAppts');
     Route::post('editData', [ApptsNoSignController::class, 'editData'])->name('editData');
+    Route::get('editData', [ApptsNoSignController::class, 'editData'])->name('editData');
     Route::post('updateAppts', [ApptsNoSignController::class, 'updateAppts'])->name('updateAppts');
     #Route::get('/login', function() { return view('loginHome'); })->name('login');
     #Route::get('/register', function() { return view('loginHome'); })->name('register');
