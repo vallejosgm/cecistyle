@@ -82,8 +82,8 @@ class CalendarController extends Controller
                 $displayForm .= '        <div class="eventsCal">';
                 foreach($appts[$k] as $x => $val) {
                     $displayForm .= '<div class="eventCal">';
-                    $displayForm .= '<form action='. route('confirmRemove') .' method="POST" style="margin-right: 0;">'.csrf_field();
-                    $displayForm .= '          <div class="eventCal" style="margin-right: 0;">';
+                    $displayForm .= '<form action='. route('confirmRemove') .' method="POST" style="margin: 0; width:96%">'.csrf_field();
+                    $displayForm .= '          <div class="eventCal" style="margin: 10px 0; width: 100%;">';
                     if ($months[$k] == date_format($today,"m") && $val->Day == date_format($today,"d")) $daySelected = "day_selected";
                     else $daySelected = "";
                     if($dayNoRepeat == $val->Day.'-'.$months[$k].'-'.$years[$k]) {

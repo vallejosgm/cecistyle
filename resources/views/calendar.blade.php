@@ -14,8 +14,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Ceci'Style</title>
-	<link rel="stylesheet" type="text/css" href="./resources/css/app.css">
-	<link rel="stylesheet" type="text/css" href="./resources/css/gallery.css">
+	<link rel="stylesheet" type="text/css" href="./resources/css/app2.css">
+	<link rel="stylesheet" type="text/css" href="./resources/css/gallery2.css">
 	<link type="text/css" rel="stylesheet" href="./resources/css/login.css">
     <link type="text/css" rel="stylesheet" href="./resources/css/calendar.css">
     <script src="./resources/js/jquery/3.5.1/jquery.min.js"></script>
@@ -27,33 +27,34 @@
 			@php 
 				echo getLogo();
 			@endphp
-		</header>
-		<nav class="main-nav">
-			<ul id="h-content-item">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="{{ route('calendar') }}">Calendar</a></li>
-                <li>
-                    <form action="{{ route('logout') }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <input type="submit" id="logoutbtn" value="Logout">
-                    </form>
-                </li>
-            </ul>
-            <div class="nav">
-                <input type="checkbox" id="toogle">
-                <label id="iomenu" for="toogle">☰</label>
-                <div class="menu">
-                    <a href="index.php">Home</a>
-                    <a href="{{ route('calendar') }}">Calendar</a>
-                    <form action="{{ route('logout') }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <input type="submit" id="logoutbtn" value="Logout">
-                    </form>
+            <nav class="main-nav">
+                <ul id="h-content-item">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="{{ route('calendar') }}">Calendar</a></li>
+                    <li>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" id="logoutbtn" value="Logout">
+                        </form>
+                    </li>
+                </ul>
+                <div class="nav">
+                    <input type="checkbox" id="toogle">
+                    <label id="iomenu" for="toogle">☰</label>
+                    <div class="menu">
+                        <a href="index.php">Home</a>
+                        <a href="{{ route('calendar') }}">Calendar</a>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" id="logoutbtn" value="Logout">
+                        </form>
+                    </div>
                 </div>
-            </div>
-		</nav>
+            </nav>
+		</header>
+		
 		
         <div class="contentCal">
             <div class="headerCal">
@@ -106,25 +107,6 @@
                                   $ns = $_POST['nameServ'];
                                   echo confirmRemove($id, $d, $hs, $he, $e, $p, $fn, $m, $ns);
                                } else {
-                                    if (isset($_POST['sendEdit']))
-                                    {
-                                        $id = $_POST['idAppt'];
-                                        $d = $_POST['bday'];
-                                        $hs = $_POST['hoursStartAppt'];
-                                        $he = $_POST['hourEndAppt'];
-                                        $e = $_POST['emailAppt'];
-                                        $p = $_POST['phoneAppt'];
-                                        $fn = $_POST['nameAppt'];
-                                        $m = $_POST['messageAppt'];
-                                        $is = $_POST['idService'];
-                                        updateRow($id, $d, $hs, $he, $e, $p, $fn, $m, $is);
-                                    } else {
-                                        if (isset($_POST['sendDelete']))
-                                        {
-                                            $id = $_POST['idAppt'];
-                                            deleteRow($id);
-                                        }
-                                    }
                                     echo $displayForm;
                                     
                                }
@@ -134,13 +116,11 @@
                       
                    }
             ?>
-            
+            <footer>
+                <span class="copyright">© 2005 All Right Reserved <a href="https://www.cecistyle.org">CeciStyle Corp</a></span>
+            </footer>
         </div>
-        <footer id="f-cover">
-			<?php 
-				echo getFooter();
-			?>
-		</footer>	
+        	
 	</div>
 	<script type="text/javascript" src="./resources/js/calendar.js" defer></script>
     <script type="text/javascript">

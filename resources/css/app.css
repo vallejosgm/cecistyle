@@ -142,11 +142,10 @@ nav ul li a {
 
 
 main {
-    padding-bottom: 20%;
+    margin: 5px 0 36px 0;
     position: relative;
     display: block;
     width: 100%;
-    top: 155px;
     min-width: 320px;
 }
 
@@ -158,6 +157,7 @@ video {
 .flayer {
     background-color: #feb1cb;
     min-width: 320px;
+    margin: 5px 0 36px 0;
 }
 
 .two-columns {
@@ -251,7 +251,7 @@ video {
     background-color: #ffdbec;
     padding-bottom: 0;
     box-shadow: 5px 5px 30px 40px #ffdbec, inset 0px 0px 0px 46px #ffdbec;
-    margin-bottom: 300px;
+    margin: 6% 0;
 }
 
 .reviews-businness > hr {
