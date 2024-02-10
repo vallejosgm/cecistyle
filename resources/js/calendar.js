@@ -9,7 +9,7 @@ if (moduleData.getAttribute("data-module") == "calendar") {
 	elemNavHeight = document.querySelector(".nav").offsetHeight;
 	elemFooterHeight = document.querySelector("footer").offsetHeight;
 	document.getElementById("bodyCal").style.height =  ( height - elemToogleHeight - elemHeaderCalHeight - elemNavHeight - elemFooterHeight - ((0.00183611*height*height) - (3.6567655*height) + 1878.38189)) + "px";
-    console.log('aqui toy');
+    
             // Obtener el elemento del ancla
             var targetElement = document.querySelector("#day_selected");
 

@@ -14,8 +14,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Ceci'Style</title>
-	<link rel="stylesheet" type="text/css" href="./resources/css/app2.css">
-	<link rel="stylesheet" type="text/css" href="./resources/css/gallery2.css">
 	<link type="text/css" rel="stylesheet" href="./resources/css/login.css">
     <link type="text/css" rel="stylesheet" href="./resources/css/calendar.css">
     <script src="./resources/js/jquery/3.5.1/jquery.min.js"></script>

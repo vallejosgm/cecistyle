@@ -1,3 +1,11 @@
+:root {
+    --bgthemeWeb: #393939;
+    --colorfontwhite: #ffffff;
+    --bgadsWeb: #535353;
+    --bgreviews: #747474;
+    --fontfamilyadstitle: fantasy;
+  }
+
 * {
     margin: 0;
     padding: 0;
@@ -35,7 +43,8 @@ nav.main-nav{
     width: 100%;
     top: 100px;
     height: 44px;
-    background-color: #fdcae1;
+    /*background-color: #fdcae1;*/
+    background-color: var(--bgthemeWeb);
     min-width: 320px;
     max-height: 44px;
     padding-left: max(22px,env(safe-area-inset-left));
@@ -56,7 +65,7 @@ nav #h-content-item {
 }
 
 nav ul li a {
-    color: rgba(0, 0, 0, .8);
+    color: var(--colorfontwhite);
     text-decoration: none;
     padding: 30px;
     font-size: 17px;
@@ -155,7 +164,7 @@ video {
 }
 
 .flayer {
-    background-color: #feb1cb;
+    background-color: var(--bgadsWeb);
     min-width: 320px;
     margin: 5px 0 36px 0;
 }
@@ -172,24 +181,29 @@ video {
 
 .ad-externo {
     width: -webkit-fill-available;
+    position: relative;
 }
 
 .ad-interno {
-    margin: 50px;
-    padding: 50px;
-    border: 50px solid #ffc3da;
-    background-color: #ffdbec;
-    height: -webkit-fill-available;
+    background-color: var(--bgadsWeb);
+    color: var(--colorfontwhite);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
+    width: 75%;
 }
 
 .ad-interno h1 {
     font-size: 45px;
+    font-family: var(--fontfamilyadstitle);
 }
 
 .ad-interno p {
-    font-size: 20px;  
-    text-align: justify;
+    font-size: 37px;
+    font-family: cursive;
+    text-align: center;
     padding: 18px; 
 }
 
@@ -199,16 +213,23 @@ video {
     }
 
     .ad-interno p {
-        font-size: 13px;  
-        text-align: justify;
+        font-size: 37px;
+        font-family: cursive; 
+        text-align: center;
         padding: 18px; 
     }
 }
 
 @media only screen and (max-width: 861px) {
-    .ad-firstColumn {
+    /*.ad-firstColumn {
+        display: none;
+    }*/
+
+    .two-columns img {
         display: none;
     }
+
+
 
     .ad-top-externo {
         height: auto;
@@ -223,7 +244,7 @@ video {
 
     .two-columns {
         margin-top: 80px;
-        height: auto;
+        /*height: auto;*/
     } 
 
     .gallery-businness {
@@ -248,9 +269,9 @@ video {
 }
 
 .reviews-businness {
-    background-color: #ffdbec;
+    background-color: var(--bgreviews);
     padding-bottom: 0;
-    box-shadow: 5px 5px 30px 40px #ffdbec, inset 0px 0px 0px 46px #ffdbec;
+    box-shadow: 5px 5px 30px 40px var(--bgreviews), inset 0px 0px 0px 46px var(--bgreviews);
     margin: 6% 0;
 }
 
@@ -292,8 +313,8 @@ video {
     position: relative;
     min-width: 210px;
     background-color: #ffffff;
-    -webkit-box-shadow: 5px 5px 40px 30px rgba(139,139,139,0.7), inset 0px 0px 0px 46px rgba(139,139,139,0.64);
-    box-shadow: 5px 5px 40px 30px rgb(255 255 255), inset 0px 0px 0px 46px rgb(255 255 255);
+    /*-webkit-box-shadow: 5px 5px 40px 30px rgba(139,139,139,0.7), inset 0px 0px 0px 46px rgba(139,139,139,0.64);
+    box-shadow: 5px 5px 40px 30px rgb(255 255 255), inset 0px 0px 0px 46px rgb(255 255 255);*/
     width: 370px;
     max-width: 370px;
     margin: auto;
